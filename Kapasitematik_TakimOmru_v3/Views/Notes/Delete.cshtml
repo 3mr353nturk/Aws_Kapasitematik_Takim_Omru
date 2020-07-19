@@ -1,0 +1,73 @@
+﻿@model Kapasitematik_TakimOmru_v3.Note
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Note</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoteHeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoteHeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoteDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoteDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Piece.PieceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Piece.PieceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubPiece.SubPieceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubPiece.SubPieceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

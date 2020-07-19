@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Kapasitematik_TakimOmru_v3.Note>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NoteHeader)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoteDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Piece.PieceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubPiece.SubPieceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoteHeader)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoteDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Piece.PieceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubPiece.SubPieceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NoteID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NoteID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.NoteID })
+        </td>
+    </tr>
+}
+
+</table>

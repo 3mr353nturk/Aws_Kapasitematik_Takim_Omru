@@ -1,0 +1,43 @@
+﻿@model List<Kapasitematik_TakimOmru_v3.Models.Piece>
+
+
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+
+
+
+<table class="table" id="search" style=" border-radius:5px">
+    <thead>
+        <tr>
+            <td scope="col">
+                Takım Adı
+            </td>
+
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+
+
+        <tr>
+            <td>@Html.DisplayName(item.PieceName)</td>
+        </tr>
+
+        @*<td style="text-align:right">
+                <a style="font-size:15px;" href='@Url.Action("ParcaEkle","Piece",new { id=item.PieceId})' class='la la-plus'></a>
+                @Html.ActionLink("Ekle", "Create", new { id = item.PieceId }) |
+                <a style="padding-left:10px; font-size:15px;" href='@Url.Action("Edit","Piece",new { id=item.PieceId})' class='la la-edit'></a>
+                @Html.ActionLink("Güncelle", "Edit", new { id = item.PieceId }) |
+
+                <a style="padding-left:10px;font-size:15px;" href='@Url.Action("Delete","Piece",new { id=item.PieceId})' class='la la-trash'></a>
+
+            </td>*@
+
+    }
+
+</table>

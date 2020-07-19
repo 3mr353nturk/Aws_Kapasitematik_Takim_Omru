@@ -1,0 +1,1480 @@
+﻿@model Kapasitematik_TakimOmru_v3.Models.ThreeModel
+@{
+    ViewBag.Title = "TakimOmru";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--hamburger menü-->
+
+<style>
+    .tooltip.top .tooltip-inner {
+        max-width: 310px;
+        padding: 3px 8px;
+        color: #fff;
+        text-align: center;
+        background-color: #245973;
+        border-radius: 5px
+    }
+
+    .editor-field textarea {
+        width: 400px;
+        height: 110px;
+    }
+
+    .flaticon2-bell-alarm-symbol .badge {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        padding: 3px 6px;
+        border-radius: 50%;
+        background: red;
+        color: white;
+        font-size: 11px;
+    }
+</style>
+<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+    <div class="kt-header-mobile__logo">
+        <a href="index.html">
+            @*<img alt="Logo" style="width:50px; height:30px;" src="~/assets/media/logos/logo.PNG" />*@
+        </a>
+    </div>
+    <div class="kt-header-mobile__toolbar">
+        <button class="kt-header-mobile__toggler kt-header-mobile__toggler--left" id="kt_aside_mobile_toggler"><span></span></button>
+        <button class="kt-header-mobile__toggler" id="kt_header_mobile_toggler"><span></span></button>
+        <button class="kt-header-mobile__topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more"></i></button>
+    </div>
+</div>
+
+<!-- end:: Header Mobile -->
+<div class="kt-grid kt-grid--hor kt-grid--root">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+
+        <!-- begin:: Aside -->
+        <!-- Uncomment this to display the close button of the panel
+        <button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
+        -->
+        <!-- end:: Aside -->
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+
+
+
+
+
+
+            <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
+
+                <!-- begin:: Header Menu -->
+                <!-- Uncomment this to display the close button of the panel
+                <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+                -->
+                <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+                    <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+                        <ul class="kt-menu__nav ">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Header Menu -->
+                <!-- begin:: Header Topbar -->
+                <div class="kt-header__topbar">
+
+
+
+
+
+                    <!--begin: Quick panel toggler -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-placement="right">
+                        <span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
+                            <span style="font-size:15px; margin-right:15px;" class="flaticon2-bell-alarm-symbol btn btn-icon btn-brand btn-sm kt-pulse">
+                                @foreach (var item in Model.notification)
+                                {
+                                    <span class="badge">@Html.DisplayFor(modelItem => item.Count)</span>
+                                }
+                            </span>
+                        </span>
+                    </div>
+
+                    <!--end: Quick panel toggler -->
+                    <!--begin: User Bar -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
+                            <div class="kt-header__topbar-user">
+                                <span class="kt-header__topbar-welcome kt-hidden-mobile"></span>
+                                <span class="kt-header__topbar-username kt-hidden-mobile">@ViewBag.Name</span>
+                                @*<img class="kt-hidden" alt="Pic" src="assets/media/users/300_25.jpg" />*@
+
+                                <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+
+                            </div>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+
+                            <!--begin: Head -->
+                            <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-color:#1e1e2d">
+                                <div class="kt-user-card__avatar">
+                                    @*<img class="kt-hidden" alt="Pic" src="~/assets/media/users/300_25.jpg" />*@
+
+                                    <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+                                    <span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success"><img src="~/Images/@ViewBag.Logo" /></span>
+                                </div>
+                                <div class="kt-user-card__name">
+                                    @ViewBag.Name
+                                </div>
+
+                            </div>
+
+                            <!--end: Head -->
+                            <!--begin: Navigation -->
+                            <div class="kt-notification">
+
+                                <a href="@Url.Action("Profil", "Home")" class="kt-notification__item">
+                                    <div class="kt-notification__item-icon">
+                                        <i class="flaticon2-calendar-3 kt-font-success"></i>
+                                    </div>
+                                    <div class="kt-notification__item-details">
+                                        <div class="kt-notification__item-title kt-font-bold">
+                                            Hesabım
+                                        </div>
+                                    </div>
+                                </a>
+                                @using (Html.BeginForm("Logout", "Login"))
+                                {
+                                    <div class="kt-notification__custom kt-space-between">
+
+                                        <input type="submit" class="btn btn-label btn-label-brand btn-sm btn-bol" value="Çıkış Yap" />
+
+                                    </div>
+                                }
+                            </div>
+
+                            <!--end: Navigation -->
+                        </div>
+                    </div>
+
+                    <!--end: User Bar -->
+                </div>
+
+                <!-- end:: Header Topbar -->
+            </div>
+
+
+
+            <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" style="margin-bottom:30px;">
+
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__head kt-portlet__head--lg">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <img src="/Images/@ViewBag.Logo" style="width:35px; height:35px;" />
+                                @*<i class="kt-font-brand flaticon2-line-chart"></i>*@
+                            </span>
+                            <h3 class="kt-portlet__head-title">
+                                @ViewBag.Company Takım Ömrü
+                            </h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-wrapper">
+
+
+                                @*begin: Quick panel toggler*@
+                                @*<div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-placement="right">
+                                        <span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
+                                            <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="30px,0px" aria-expanded="true">
+                                                <span style="font-size:15px; margin-right:15px;" class="flaticon2-bell-alarm-symbol btn btn-icon btn-brand btn-sm kt-pulse">
+                                                    @foreach (var item in Model.notification)
+                                                    {
+                                                        <span class="badge">@Html.DisplayFor(modelItem => item.Count)</span>
+                                                    }
+                                                </span>
+
+                                            </div>
+                                        </span>
+                                    </div>*@
+
+                                @*end: Quick panel toggler
+                                    begin::Quick Panel*@
+                                <div id="kt_quick_panel" class="kt-quick-panel">
+                                    <a href="#" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i class="flaticon2-delete"></i></a>
+                                    <div class="kt-quick-panel__nav">
+                                        <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand  kt-notification-item-padding-x" role="tablist">
+                                            <li class="nav-item active">
+                                                <a class="nav-link active" data-toggle="tab" href="#kt_quick_panel_tab_notifications" role="tab">Tümü</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_tab_settings" role="tab">Son 7 Gün</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_tab_settings_otuz" role="tab">Son 30 Gün</a>
+                                            </li>
+                                            @*<li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_tab_settings_otuz" role="tab">Son 30 Gün</a>
+                                                </li>*@
+                                        </ul>
+                                    </div>
+                                    <div class="kt-quick-panel__content">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show kt-scroll active" id="kt_quick_panel_tab_notifications" role="tabpanel">
+                                                <div class="kt-notification" id="notificationtumliste">
+                                                    @*@foreach (var item in Model.notification)
+                                                        {
+
+                                                            <a href="@Url.Action("Index", "Notification", new { id=item.NotificationID })" class="kt-notification__item">
+                                                                <div class="kt-notification__item-icon">
+                                                                    <i class="flaticon2-box-1 kt-font-brand"></i>
+                                                                </div>
+                                                                <div class="kt-notification__item-details">
+                                                                    <div class="kt-notification__item-title">
+                                                                        @Html.DisplayFor(modelItem => item.Notification_Description)
+                                                                    </div>
+                                                                    <div class="kt-notification__item-time">
+                                                                        @Html.DisplayFor(modelItem => item.Notification_Date)
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        }*@
+
+                                                    @*<a href="@Url.Action("Details", "Notification", new { id=item.NotificationID })" class="kt-notification__item">
+                                                            <div class="kt-notification__item-icon">
+                                                                <i class="flaticon2-box-1 kt-font-brand"></i>
+                                                            </div>
+                                                            <div class="kt-notification__item-details">
+                                                                <div class="kt-notification__item-title" style="font-family:Poppins, Helvetica, sans-serif;">
+
+                                                                </div>
+                                                                <div class="kt-notification__item-time">
+
+                                                                </div>
+                                                            </div>
+                                                        </a>*@
+
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade show kt-scroll" id="kt_quick_panel_tab_settings" role="tabpanel">
+                                                <div class="kt-notification" id="notificationyediliste">
+
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade show kt-scroll" id="kt_quick_panel_tab_settings_otuz" role="tabpanel">
+                                                <div class="kt-notification" id="notificationotuzliste">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="kt-form__group kt-form__group--inline">
+                                    <div class="dropdown dropdown-inline">
+                                        <button type="button" style="margin-right:15px;" class="btn btn-icon btn-brand btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i style="font-size:20px;" class="la la-gear"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <ul class="kt-nav">
+
+                                                <li class="kt-nav__item">
+                                                    <a href="@Url.Action("Export", "Piece")" class="kt-nav__link">
+                                                        <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                                        <span class="kt-nav__link-text">Takımı Dışa Aktar</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a href="@Url.Action("ExportAll", "SubPiece")" class="kt-nav__link">
+                                                        <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                                        <span class="kt-nav__link-text">Tüm Parçaları Dışa Aktar</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="dropdown dropdown-inline">
+                                    <button type="button" class="btn btn-brand btn-icon btn-sm" data-toggle="modal" data-target="#exampleModal" aria-haspopup="true" aria-expanded="false">
+                                        <i style="font-size:15px; " class="flaticon2-plus"></i>
+                                    </button>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    @* takim import excel *@
+                    <div class="modal fade" id="exampleModall" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:600px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Excel Dosyası Yükle</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <!--begin::Form-->
+                                    @using (Html.BeginForm("Upload", "Piece", FormMethod.Post, new
+                                    {
+                                        enctype = "multipart/form-data"
+                                    }))
+                                    {
+                                        <table>
+                                            <tr>
+
+                                                <td> <input class="btn btn-default" type="file" name="UploadedFile" value="Excel Yükle" /> </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"> <input type="submit" value="Kaydet" class="btn btn-default" /></td>
+                                            </tr>
+                                        </table>
+                                    }
+                                    <!--end::Form-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*parca import excel *@
+                    <div class="modal fade" id="exampleModalll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:600px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Excel Dosyası</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    @using (Html.BeginForm("Upload", "SubPiece", FormMethod.Post, new
+                                    {
+                                        enctype = "multipart/form-data"
+
+                                    }))
+                                    {
+                                        <table>
+                                            <tr>
+
+                                                <td> <input class="btn btn-default" type="file" name="UploadedFile" value="Excel Yükle" /> </td>
+                                                <td> <input type="text" name="id" id="importt" value="" /> </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"> <input type="submit" value="Kaydet" class="btn btn-default" /></td>
+                                            </tr>
+                                        </table>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @* parca export modal *@
+                    <div class="modal fade" id="parcaexportmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:600px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Excel Dosyası</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    @using (Html.BeginForm("Export", "SubPiece", FormMethod.Post, new
+                                    {
+                                        enctype = "multipart/form-data"
+
+                                    }))
+                                    {
+                                        <table>
+                                            <tr>
+
+                                                <td>Exceli Dışa Aktar</td>
+                                                <td> <input type="text" name="idsubpiece" id="exportt" value="" /> </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"> <input type="submit" value="Dışa Aktar" class="btn btn-default" /></td>
+                                            </tr>
+                                        </table>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* parca düzenle modal *@
+                    <div class="modal fade" id="parcaguncelle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:600px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Parça Düzenle</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    @using (Html.BeginForm("ParcaGuncelle", "Home", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal" style="padding-top:10px">
+
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                            @Html.HiddenFor(model => model.subPiece.SubPieceID)
+                                            <div class="form-group">
+                                                @Html.Label("Parça Adı: ", new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+
+                                                    <input type="text" name="par" id="parcaduz" value="" />
+                                                    @Html.EditorFor(model => model.subPiece.SubPieceName, new { htmlAttributes = new { @class = "form-control", @id = "subpiecename", @name = "SubPieceName" } })
+                                                    @Html.ValidationMessageFor(model => model.subPiece.SubPieceName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.Label("Takım Ömrü: ", new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+
+                                                    @Html.EditorFor(model => model.subPiece.ToolLife, new { htmlAttributes = new { @class = "form-control", @id = "ToolLife", @name = "ToolLife" } })
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Güncelle" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                    @*@using (Html.BeginForm("ParcaGuncelle", "Home", FormMethod.Get))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal" style="padding-top:10px">
+                                            @Html.HiddenFor(model => model.subPiece.SubPieceID)
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                            <div class="form-group">
+                                                @Html.Label("Parça Adı: ", new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+
+                                                    <input type="text" name="par" id="parcaduz" value="" />
+
+                                                    @Html.EditorFor(m => m.subPiece.SubPieceName, new { htmlAttributes = new { @class = "form-control", @id = "subpiecename", @name = "SubPieceName", @value = "SubPieceName" } })
+
+                                                    @Html.ValidationMessageFor(m => m.subPiece.SubPieceName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.Label("Takım Ömrü: ", new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+
+                                                    @Html.EditorFor(m => m.subPiece.ToolLife, new { htmlAttributes = new { @class = "form-control", @id = "ToolLife", @name = "ToolLife", @value = "ToolLife" } })
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Güncelle" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }*@
+
+
+                                    @*@using (Html.BeginForm("ParcaGuncelle", "Home", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="padding-top:10px">
+            @Html.HiddenFor(model => model.subPiece.SubPieceID)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                @Html.Label("Parça Adı: ", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    <input type="text" name="par" id="parcaduz" value="" />
+
+                    @Html.EditorFor(m => m.subPiece.SubPieceName, new { htmlAttributes = new { @class = "form-control", @id = "subpiecename", @name = "SubPieceName", @value = "SubPieceName" } })
+
+                    @Html.ValidationMessageFor(m => m.subPiece.SubPieceName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Takım Ömrü: ", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.EditorFor(m => m.subPiece.ToolLife, new { htmlAttributes = new { @class = "form-control", @id = "ToolLife", @name = "ToolLife", @value = "ToolLife" } })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Güncelle" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }*@
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @* parca sil modal *@
+                    <div class="modal fade" id="parcasil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:600px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Parçayı Sil</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    <dl class="dl-horizontal">
+                                        <dt style="width:290px;">
+                                            @Html.Label("Parçayı silmek istediğinize emin misiniz?")
+                                        </dt>
+
+
+                                    </dl><hr />
+
+                                    @using (Html.BeginForm("ParcaSil", "Home", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="text" name="parcaid" id="parc" value="" />
+                                        <div class="form-actions no-color">
+                                            <input type="submit" value="Sil" class="btn btn-default" />
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:600px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Alt Parça Ekle</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+
+                                    @using (Html.BeginForm("Create", "SubPieces", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal" style="padding-top:10px">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @*<label class="control-label col-md-2">Tipi:</label>*@
+                                                <div class="col-md-10">
+                                                    <div class="input-group">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-navicon"></i>
+                                                            </span>
+                                                        </div>
+                                                        @Html.DropDownListFor(m => m.subPiece.Type, new SelectList(new[]
+               {
+                   new SelectListItem { Value = "false", Text = "Parça Sayısına Göre" },
+                   new SelectListItem { Value = "true", Text = "Zamana Göre" },
+               },
+               "Value",
+               "Text"
+               ),
+        new { @class = "form-control", @id="SelectType" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @*<label class="control-label col-md-2">Parça Adı:</label>*@
+
+                                                <div class="col-md-10">
+                                                    <div class="input-group">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-cube"></i>
+                                                            </span>
+                                                        </div>
+                                                        @Html.EditorFor(m => m.subPiece.SubPieceName, new { htmlAttributes = new { @class = "form-control", @id = "subpiecename", onblur = "Kontrol()", placeholder = "Parça Adı" } })
+                                                    </div>
+                                                    @Html.ValidationMessageFor(m => m.subPiece.SubPieceName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @*<label id="totalcountlbl" class="control-label col-md-2">Takım Ömrü:</label>*@
+                                                @*@Html.LabelFor(model => model.TotalCount, htmlAttributes: new { @class = "control-label col-md-2", @id = "totalcountlbl" })*@
+                                                @*<label id="datepickerlbl" class="control-label col-md-2">Takım Ömrü:</label>*@
+                                                <div class="col-md-10">
+                                                    <div class="input-group">
+
+                                                        <div id="totalcountlbl" class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-heart-o"></i>
+                                                            </span>
+                                                        </div>
+
+                                                       @Html.EditorFor(m => m.subPiece.ToolLife, new { htmlAttributes = new { @class = "form-control", @id = "totalcount", placeholder = "Takım Ömrü" } })
+
+                                                        @Html.ValidationMessageFor(model => model.subPiece.ToolLife, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="input-group date">
+                                                        <div id="datepickerlbl" class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-tachometer"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control startdatee" name="startdatee" placeholder="gün/ay/yıl" readonly id="kt_datetimepicker_2" />
+                                                        <div class="input-group-append" id="tarihicon1">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control enddatee" name="enddatee" placeholder="gün/ay/yıl" readonly id="kt_datetimepicker_2" />
+                                                        <div class="input-group-append" id="tarihicon2">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @*<label class="control-label col-md-2">Takımın Adı:</label>*@
+                                                @*@Html.LabelFor(model => model..PieceID, "PieceID", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                <div class="col-md-10">
+                                                    <div class="input-group">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-navicon"></i>
+                                                            </span>
+                                                        </div>
+                                                        @*@Html.DropDownList("FKPieceID", new SelectList(ViewBag.FKPieceID, "FKPieceID", "PieceName"), "Parça Seçiniz", new { @class = "form-control" })*@
+                                                        @*@Html.DropDownList("FKPieceID", null, htmlAttributes: new { @class = "form-control" })*@
+                                                        @Html.DropDownListFor(m => m.subPiece.FKPieceID, new SelectList(ViewBag.FKPieceID, "Value", "Text"), new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.subPiece.FKPieceID, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10 modal-footer">
+
+                                                    <input type="submit" value="Kapat" @*onclick="Kaydett()"*@ class="btn btn-default" data-dismiss="modal" />
+                                                    <input id="btnEkle" type="submit" value="Ekle" onclick="Kaydett()" class="btn btn-default" />
+                                                    <input id="btnEklee" type="submit" value="Ekle" onclick="Kaydet()" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @* Takım Not Ekle modal *@
+                    <div class="modal fade" id="takimanotekle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:600px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Not Ekle</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    @using (Html.BeginForm("CreateNoteTakim", "Notes", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2"></label>
+                                                <div class="col-md-10">
+                                                    <div class="input-group">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-commenting"></i>
+                                                            </span>
+                                                        </div>
+                                                        @Html.EditorFor(model => model.note.NoteHeader, new { htmlAttributes = new { @class = "form-control", placeholder = "Not Başlık" } })
+                                                        @Html.ValidationMessageFor(model => model.note.NoteHeader, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2"></label>
+                                                <div class="col-md-10">
+                                                    <div class="input-group">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-pencil-square"></i>
+                                                            </span>
+                                                        </div>
+                                                        @Html.EditorFor(model => model.note.NoteDescription, new { htmlAttributes = new { @class = "form-control", placeholder = "Notunuzu giriniz" } })
+                                                        @Html.ValidationMessageFor(model => model.note.NoteDescription, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @*<div class="form-group">
+                                                    @Html.LabelFor(model => model.note.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.note.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.note.CreatedDate, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>*@
+
+                                            @*<div class="form-group">
+                                                    @Html.LabelFor(model => model.note.FkPieceID, "FkPieceID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.DropDownListFor(model=>model.note.FkPieceID, (SelectList)ViewBag.FkPieceIDd, htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.note.FkPieceID, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>*@
+
+                                            @*<div class="form-group">
+                                                    @Html.LabelFor(model => model.note.FkUserID, "FkUserID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.DropDownList("FkUserID", null, htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.note.FkUserID, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>*@
+                                            <input type="text" name="nottakimid" id="notetakim" value="" />
+                                            <input type="text" name="typetakim" id="typetakim" value="False" />
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-7 col-md-10">
+                                                    <input type="submit" value="Notu Ekle" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Parça Not Ekle modal *@
+                    <div class="modal fade" id="parcayanotekle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:600px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Parçaya Not Ekle</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    @using (Html.BeginForm("CreateNoteParca", "Notes", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2"></label>
+                                                <div class="col-md-10">
+                                                    <div class="input-group">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-commenting"></i>
+                                                            </span>
+                                                        </div>
+                                                        @Html.EditorFor(model => model.note.NoteHeader, new { htmlAttributes = new { @class = "form-control", placeholder = "Not Başlık" } })
+                                                        @Html.ValidationMessageFor(model => model.note.NoteHeader, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2"></label>
+                                                <div class="col-md-10">
+                                                    <div class="input-group">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="la la-pencil-square"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="editor-field">
+                                                            @Html.TextAreaFor(model => model.note.NoteDescription, new { htmlAttributes = new { @class = "form-control", placeholder = "Notunuzu giriniz", @id = "comment" } })
+                                                            @Html.ValidationMessageFor(model => model.note.NoteDescription, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @*<div class="form-group">
+                                                    @Html.LabelFor(model => model.note.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.note.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.note.CreatedDate, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>*@
+
+                                            @*<div class="form-group">
+                                                    @Html.LabelFor(model => model.note.FkPieceID, "FkPieceID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.DropDownListFor(model=>model.note.FkPieceID, (SelectList)ViewBag.FkPieceIDd, htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.note.FkPieceID, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>*@
+
+                                            @*<div class="form-group">
+                                                    @Html.LabelFor(model => model.note.FkUserID, "FkUserID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.DropDownList("FkUserID", null, htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.note.FkUserID, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>*@
+                                            <input type="text" name="notparcaid" id="noteparca" value="" />
+                                            <input type="text" name="typeparca" id="typeparca" value="True" />
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-7 col-md-10">
+                                                    <input type="submit" value="Notu Ekle" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="kt-portlet__body">
+
+                        <!--begin: Search Form -->
+                        <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                            <div class="row align-items-center">
+                                <div class="col-xl-8 order-2 order-xl-1">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                            <div class="kt-input-icon kt-input-icon--left">
+                                                <input type="text" class="form-control" placeholder="Arama..." id="generalSearch">
+                                                <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                    <span><i class="la la-search"></i></span>
+                                                </span>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-8 kt-margin-b-20-tablet-and-mobile">
+                                            <div class="kt-form__group kt-form__group--inline">
+                                                <div class="kt-form__label">
+                                                    <label>Tarih:</label>
+                                                </div>
+                                                <div class="input-daterange input-group" id="kt_datepicker_5" data-date-format="dd.mm.yyyy">
+
+                                                    <input type="text" class="form-control datepickers" style="width:500px" id="ilk" placeholder="gün/ay/yıl" name="start" />
+                                                    <span class="input-group-text">
+                                                        <i class="la la-calendar"></i>
+                                                    </span>
+                                                    <input style="width:40px; margin-left:18px" type="text" id="son" class="form-control datepickers" placeholder="gün/ay/yıl" name="end" />
+                                                    <span class="input-group-text">
+                                                        <i class="la la-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                                <div class="kt-input-icon kt-input-icon--left">
+                                                    <input type="text" class="form-control" placeholder="Arama..." id="generalSearchh">
+                                                    <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                        <span><i class="la la-search"></i></span>
+                                                    </span>
+
+                                                </div>
+
+
+                                            </div>*@
+
+                                        @*<div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                                <div class="kt-form__group kt-form__group--inline">
+                                                    <div class="dropdown dropdown-inline">
+                                                        <button type="button" class="btn btn-brand btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="la la-gear"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <ul class="kt-nav">
+
+                                                                <li class="kt-nav__item">
+                                                                    <a href="@Url.Action("Export", "Piece")" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                                                        <span class="kt-nav__link-text">Takımı Dışa Aktar</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="kt-nav__item">
+                                                                    <a href="@Url.Action("ExportAll", "SubPiece")" class="kt-nav__link">
+                                                                        <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                                                        <span class="kt-nav__link-text">Tüm Parçaları Dışa Aktar</span>
+                                                                    </a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                            <div class="kt-form__group kt-form__group--inline">
+
+                                                <div class="kt-form__control">
+                                                    @*@Html.DropDownListFor(m => m.PieceId, (SelectList)ViewBag.Piece, "Lütfen Seçiniz", new { @class = "dropdown form-control", @id = "kt_form_status" })*@
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--end: Search Form -->
+                    </div>
+
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__body">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#" data-target="#kt_tabs_1_1">Parça Sayısına Göre</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tabs_1_3">Zamana Göre</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="color:red;" data-toggle="tab" href="#kt_tabs_1_4">Ömrü Tükenmeye Yakın Olan</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="kt_tabs_1_1" role="tabpanel">
+                                    <div class="kt-form kt-form--label-align-right kt-margin-t-10 kt-margin-b-30">
+                                        <div class="row">
+
+                                            @*<div class="col-lg-12">
+                                                    <button class="btn btn-secondary" type="button" id="datatable_asc">A-Z ye sırala</button>
+                                                    <button class="btn btn-secondary" type="button" id="datatable_desc">Z-A ya sırala</button>
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                    <div class="kt-portlet__body kt-portlet__body--fit">
+
+                                        <!--begin: Datatable -->
+                                        <div class="datatable childd" id="child_data_ajax">
+
+                                        </div>
+
+                                        <!--end: Datatable -->
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="kt_tabs_1_3" role="tabpanel">
+                                    <div class="kt-portlet__body kt-portlet__body--fit">
+
+                                        <!--begin: Datatable -->
+                                        <div class="datatabletime time" id="child_time">
+
+                                        </div>
+
+                                        <!--end: Datatable -->
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane" id="kt_tabs_1_4" role="tabpanel">
+                                    <div class="kt-portlet__body kt-portlet__body--fit">
+
+                                        <!--begin: Datatable -->
+                                        <div class="data childs" id="child">
+
+                                        </div>
+
+                                        <!--end: Datatable -->
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="kt-footer  kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer" style="margin-top:19%;">
+                    <div class="kt-container  kt-container--fluid ">
+                        <div class="kt-footer__copyright">
+                            2020&nbsp;&copy;&nbsp;@*<a href="http://keenthemes.com/metronic" target="_blank" class="kt-link">*@Tezmaksan@*</a>*@
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- end:: Content -->
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+            // Declare a proxy to reference the hub.
+            var notifications = $.connection.myHub;
+            //debugger;
+            // Create a function that the hub can call to broadcast messages.
+            notifications.client.updatenotification = function () {
+                NotificationList()
+            };
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                console.log("connection started")
+                //notifications.onconn();
+                NotificationList();
+            }).fail(function (e) {
+                alert(e);
+            });
+        });
+        function NotificationList() {
+            var tbl = $('#notificationyediliste');
+            $.ajax({
+                url: '/Notification/NotificationList',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    console.log(result);
+                    var a2 = JSON.parse(result);
+                    tbl.empty();
+                    var i = 1;
+                    $.each(a2, function (key, value) {
+                        tbl.append('<a href="/Notification/Details/' + value.NotificationID + '" class="kt-notification__item">' + ' <div class="kt-notification__item-icon">' + '<i class="flaticon2-box-1 kt-font-brand"></i>' + '</div>' + '<div class="kt-notification__item-details">' + ' <div class="kt-notification__item-title" style="font-family:Poppins, Helvetica, sans-serif;">' + value.Notification_Description + '</div>' + '<div class="kt-notification__item-time">' + value.Notification_Date + '</div>' + '</div>' + '</a>');
+                        i = i + 1;
+                    });
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            // Declare a proxy to reference the hub.
+            var notifications = $.connection.myHub;
+            //debugger;
+            // Create a function that the hub can call to broadcast messages.
+            notifications.client.updatenotification = function () {
+                NotificationTumList()
+            };
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                console.log("connection started")
+                //notifications.onconn();
+                NotificationTumList();
+            }).fail(function (e) {
+                alert(e);
+            });
+        });
+        function NotificationTumList() {
+            var tbl = $('#notificationtumliste');
+            $.ajax({
+                url: '/Notification/NotificationTumList',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    console.log(result);
+                    var a2 = JSON.parse(result);
+                    tbl.empty();
+                    var i = 1;
+                    $.each(a2, function (key, value) {
+                        tbl.append('<a href="/Notification/Details/' + value.NotificationID + '" class="kt-notification__item">' + ' <div class="kt-notification__item-icon">' + '<i class="flaticon2-box-1 kt-font-brand"></i>' + '</div>' + '<div class="kt-notification__item-details">' + ' <div class="kt-notification__item-title" style="font-family:Poppins, Helvetica, sans-serif;">' + value.Notification_Description + '</div>' + '<div class="kt-notification__item-time">' + value.Notification_Date + '</div>' + '</div>' + '</a>');
+                        i = i + 1;
+                    });
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            // Declare a proxy to reference the hub.
+            var notifications = $.connection.myHub;
+            //debugger;
+            // Create a function that the hub can call to broadcast messages.
+            notifications.client.updatenotification = function () {
+                NotificationOtuzList()
+            };
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                console.log("connection started")
+                //notifications.onconn();
+                NotificationOtuzList();
+            }).fail(function (e) {
+                alert(e);
+            });
+        });
+        function NotificationOtuzList() {
+            var tbl = $('#notificationotuzliste');
+            $.ajax({
+                url: '/Notification/NotificationOtuzList',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    console.log(result);
+                    var a2 = JSON.parse(result);
+                    tbl.empty();
+                    var i = 1;
+                    $.each(a2, function (key, value) {
+                        tbl.append('<a href="/Notification/Details/' + value.NotificationID + '" class="kt-notification__item">' + ' <div class="kt-notification__item-icon">' + '<i class="flaticon2-box-1 kt-font-brand"></i>' + '</div>' + '<div class="kt-notification__item-details">' + ' <div class="kt-notification__item-title" style="font-family:Poppins, Helvetica, sans-serif;">' + value.Notification_Description + '</div>' + '<div class="kt-notification__item-time">' + value.Notification_Date + '</div>' + '</div>' + '</a>');
+                        i = i + 1;
+                    });
+                }
+            });
+        }
+    </script>
+
+
+
+
+
+    @*<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+        <script>
+            var OneSignal = window.OneSignal || [];
+            OneSignal.push(function () {
+                OneSignal.init({
+                    appId: "d6d2fce9-81ab-4567-ac68-6ef75ba7b203",
+                });
+            });
+        </script>*@
+
+
+
+
+
+
+
+    <style>
+
+        .tooltip-inner {
+            min-width: 250px; /* the minimum width */
+            color: #fff;
+            line-height: 25px;
+            white-space: pre-line;
+            border-radius: 8px;
+            background-color: #245973;
+            font-family: Poppins, Helvetica, sans-serif;
+        }
+        /* Tooltip */
+        .progress-bar + .tooltip > .tooltip-inner {
+            background-color: #73AD21;
+            color: #FFFFFF;
+            border: 1px solid green;
+            padding: 15px;
+            font-size: 20px;
+        }
+    </style>
+
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+
+    <script>
+
+
+
+        $(function () {
+            $("#SelectType").on("change", function () {
+                if ($("#SelectType").val() == "false") {
+
+                    $(".startdatee").hide();
+                    $(".enddatee").hide();
+                    $("#bolme").hide();
+                    $("#countlbl").show();
+                    $("#counttxt").show();
+                    $("#datepickerlbl").hide();
+                    $("#counttimelbl").hide();
+                    $("#totalcount").show();
+                    $("#totalcountlbl").show();
+                    $("#tarihicon1").hide();
+                    $("#tarihicon2").hide();
+                    $("#btnEkle").show();
+                    $("#btnEklee").hide();
+
+
+                } else {
+
+                    $(".startdatee").show();
+                    $(".enddatee").show();
+                    $("#bolme").show();
+                    $("#datepickerlbl").show();
+                    $("#datepickerlbl").show();
+                    $("#countlbl").hide();
+                    $("#counttxt").hide();
+                    $("#counttimelbl").hide();
+                    $("#totalcount").hide();
+                    $("#totalcountlbl").hide();
+                    $("#tarihicon1").show();
+                    $("#tarihicon2").show();
+                    $("#btnEkle").hide();
+                    $("#btnEklee").show();
+                }
+
+            });
+            $("#SelectType").trigger("change");
+            //if ($("#SelectType").val() == "false") {
+                
+            //} else {
+            //    $("#btnEkle").hide();
+            //    $("#btnEklee").show();
+            //}
+            if ($("#SelectType").val() == "false") {
+                $("#btnEklee").show();
+                $("#btnEkle").hide();
+            } else {
+                $("#btnEklee").hide();
+                $("#btnEkle").show();
+            }
+        });
+    </script>
+
+    <script>
+
+
+
+        function Kontrol() {
+            var start = $('.startdatee').val();
+            var end = $('.enddatee').val();
+
+
+
+            var startDay = new Date(start);
+            var endDay = new Date(end);
+            if (startDay > endDay) {
+                alert("başlangıç tarihi bitiş tarihinden büyük olamaz");
+                $('.startdatee').val("");
+                $('.enddatee').val("");
+            }
+
+
+
+
+        }
+
+
+
+
+
+        function Kaydet() {
+
+            //document.getElementById("counttxt").disabled = false;
+            var start = $('.startdatee').val();
+            var end = $('.enddatee').val();
+
+
+
+            var startDay = new Date(start);
+            var endDay = new Date(end);
+
+
+
+
+            var millisecondsPerDay = 1000 * 60 * 60 * 24;
+
+            var millisBetween = endDay.getTime() - startDay.getTime();
+            var days = (millisBetween / millisecondsPerDay);
+            var hours = days * 24;
+            // Round down.
+            $("#totalcount").val(hours);
+            //var now = new Date()
+            //var nowtostart = now.getTime() - startDay.getTime();
+            //var day = (nowtostart / millisecondsPerDay);
+            //var hour = day * 24;
+            //$("#counttxt").val(hour.toFixed(0));
+
+        }
+
+        function Kaydett() {
+
+            var value = $('#totalcount').val();
+            //alert(value);
+            $("#totalcount").val(value);
+
+        }
+
+    </script>
+
+
+}
+
+
+
+
+
+
+<!-- end:: Page -->
+<!-- begin::Scrolltop -->
+<!-- end::Scrolltop -->
+<!-- end::Sticky Toolbar -->
+<!-- begin::Demo Panel -->
+<!-- end::Demo Panel -->
+<!--Begin:: Chat-->
+<!--ENd:: Chat-->
+<!-- begin::Global Config(global config for global JS sciprts) -->
+<style>
+    .multiselect {
+        width: 200px;
+    }
+
+    .selectBox {
+        position: relative;
+    }
+
+
+        .selectBox select {
+            width: 100%;
+            font-weight: bold
+        }
+
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+        #checkboxes label {
+            display: block;
+        }
+</style>
+
+
+<script>
+    var expanded = false;
+
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+</script>
+<script>
+    var KTAppOptions = {
+        "colors": {
+            "state": {
+                "brand": "#5d78ff",
+                "dark": "#282a3c",
+                "light": "#ffffff",
+                "primary": "#5867dd",
+                "success": "#34bfa3",
+                "info": "#36a3f7",
+                "warning": "#ffb822",
+                "danger": "#fd3995"
+            },
+            "base": {
+                "label": [
+                    "#c5cbe3",
+                    "#a1a8c3",
+                    "#3d4465",
+                    "#3e4466"
+                ],
+                "shape": [
+                    "#f0f3ff",
+                    "#d9dffa",
+                    "#afb4d4",
+                    "#646c9a"
+                ]
+            }
+        }
+    };
+</script>
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            KTDatatablee();
+        });
+    </script>*@
+
+<!--end::Page Scripts -->

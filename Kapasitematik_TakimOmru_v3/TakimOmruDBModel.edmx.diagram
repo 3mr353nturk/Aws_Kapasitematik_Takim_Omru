@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d2213ff947464178959603a28a852e83" Name="Diagram1">
+        <EntityTypeShape EntityType="TakimOmruDBModel.Detail" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakimOmruDBModel.Piece" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakimOmruDBModel.SubPiece" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakimOmruDBModel.User" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_Detail_SubPiece" ManuallyRouted="false" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_Detail_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_Piece_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_SubPiece_Piece" ManuallyRouted="false" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_SubPiece_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TakimOmruDBModel.Notification" Width="1.5" PointX="2.875" PointY="0.5" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_Notification_User" />
+        <EntityTypeShape EntityType="TakimOmruDBModel.Note" Width="1.5" PointX="7.5" PointY="4.25" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_Notes_Piece" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_Notes_SubPiece" />
+        <AssociationConnector Association="TakimOmruDBModel.FK_Notes_User" />
+        <EntityTypeShape EntityType="TakimOmruDBModel.PimsunDeviceNo" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

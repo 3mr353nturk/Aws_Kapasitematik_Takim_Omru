@@ -1,0 +1,521 @@
+﻿@model List<Kapasitematik_TakimOmru_v3.Models.DetailModel>
+
+<link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <style>
+        .notfound {
+            display: none;
+        }
+
+        .dataTables_length {
+            float: left;
+        }
+    </style>
+    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // Declare a proxy to reference the hub.
+            var notifications = $.connection.myHub;
+            //debugger;
+            // Create a function that the hub can call to broadcast messages.
+            notifications.client.updatedetail = function () {
+                DetailList();
+            };
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                console.log("connection started")
+                //notifications.onconn();
+                DetailList();
+            }).fail(function (e) {
+                alert(e);
+            });
+        });
+        function Kontrol() {
+            var start = $('#ilkk').val();
+            var end = $('#sonn').val();
+
+
+
+            var startDay = new Date(start);
+            var endDay = new Date(end);
+            if (startDay > endDay) {
+                alert("başlangıç tarihi bitiş tarihinden büyük olamaz");
+                $('#ilkk').val();
+                $('#sonn').val();
+            }
+        }
+        function sortTable(n) {
+
+            $(".rotate").toggleClass("flaticon2-arrow-up flaticon2-arrow-down");
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("detailTable");
+            switching = true;
+            // Set the sorting direction to ascending:
+            dir = "asc";
+            /* Make a loop that will continue until
+            no switching has been done: */
+            while (switching) {
+                // Start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /* Loop through all table rows (except the
+                first, which contains table headers): */
+                for (i = 1; i < (rows.length - 1); i++) {
+                    // Start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* Get the two elements you want to compare,
+                    one from current row and one from the next: */
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    /* Check if the two rows should switch place,
+                    based on the direction, asc or desc: */
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch
+                    and mark that a switch has been done: */
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    // Each time a switch is done, increase this count by 1:
+                    switchcount++;
+                } else {
+                    /* If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again. */
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+        $("#searchrec").keyup(function () {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchrec");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("detailTable");
+            tr = table.getElementsByTagName("tr");
+            // Loop through all table rows, and hide those who don't match the search query
+
+            $("#detailTable tr:not('.no-records')").filter(function () {
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td)
+                        txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    }
+                    else {
+                        tr[i].style.display = "none";
+                    }
+                }
+                var trSel = $("#detailTable tr:not('.no-records'):visible");
+                // Check for number of rows & append no records found row
+                if (trSel.length == 0) {
+                    $("#detailTable").find('.no-records').show();
+                }
+                else {
+                    $("#detailTable").find('.no-records').hide();
+                }
+            });
+
+        });
+        var table;
+        function DetailList() {
+            table = $('#detailTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Turkish.json"
+                },
+                "searching": false,
+                "lengthChange": false,
+                "bInfo": false,
+                "processing": true, // for show progress bar
+                //"serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "responsive": true,
+                "paging": true,
+                "bDestroy": true,
+                colReorder: {
+                    realtime: true
+                },
+                "columnDefs": [{
+                    "targets": '_all',
+                    "createdCell": function (td, cellData, rowData, row, col) {
+                        $(td).css('padding-left', '80px')
+                        $("#detailTable tr td:nth-child(1)").css('padding-left', '10px')
+                    }
+                }],
+                "ajax": {
+                    "url": "/Detail/DetailList/",
+                    "data": function (data) {
+                        data.basTarih = $("#ilkk").val();
+                        data.bitTarih = $("#sonn").val();
+                    },
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "PieceCount", "name": "PieceCount", "autoWidth": true },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    { "data": "CreatedDate", "name": "CreatedDate", "autoWidth": true },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function () {
+                            return null
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function (value) { return '<td style=" text-align:right; border-top-color:#ececec;">' + '<a style="font-size:17px;" href="/Detail/Create" class="la la-plus"></a>' + '<a style="font-size:17px; padding-left:10px;" href="/Detail/Edit/' + value.DetailID + '" class="la la-edit"></a>' + '<a style="font-size:17px; padding-left:10px;" href="/Detail/Delete/' + value.DetailID + '" class="la la-trash"></a>' + '</td>' + '</tr>'; }
+                    }
+                ],
+            });
+            $("#ilkk").datepicker({
+                "onSelect": function (date) {
+                    minDateFilter = new Date(date).getTime();
+                    table.draw();
+                }
+            }).keyup(function () {
+                minDateFilter = new Date(this.value).getTime();
+                table.draw();
+            });
+            $("#sonn").datepicker({
+                "onSelect": function (date) {
+                    maxDateFilter = new Date(date).getTime();
+                    table.draw();
+                }
+            }).keyup(function () {
+                maxDateFilter = new Date(this.value).getTime();
+                table.draw();
+            });
+
+            $('#ilkk, #sonn').on('change', function () {
+                if ($('#ilkk').val() != '' && $('#sonn').val() != '') {
+                    $.fn.dataTable.ext.search.push(
+                        function (settings, data, dataIndex) {
+                            var from = $('#ilkk').val();
+                            var to = $('#sonn').val();
+                            var column = data[6];
+                            if (from <= column && column <= to) {
+                                return true;
+                            }
+                            return false;
+                        }
+                    );
+                    table.ajax.reload();
+                }
+                else {
+                    table.ajax.reload();
+                }
+            });
+            minDateFilter = "";
+            maxDateFilter = "";
+            $.fn.dataTableExt.afnFiltering.push(
+                function (oSettings, aData, iDataIndex) {
+                    if (typeof aData._date == 'undefined') {
+                        aData._date = new Date(aData[1]).getTime();
+                    }
+                    if (minDateFilter && !isNaN(minDateFilter)) {
+                        if (aData._date < minDateFilter) {
+                            return false;
+                        }
+                    }
+                    if (maxDateFilter && !isNaN(maxDateFilter)) {
+                        if (aData._date > maxDateFilter) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            );
+
+        }
+
+
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/Detail/Index", // the method we are calling
+        //    contentType: "application/html; charset=utf-8",
+        //    data: { startDate: firstdate, endDate: lastdate },
+        //    dataType: "html",
+        //    success: function (result) {
+        //        console.log(result);
+        //        DetailList();
+        //    },
+        //    error: function (result) {
+        //        alert('hata');
+        //    }
+        //});
+    </script>
+    <!--hamburger menü-->
+
+}
+
+
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+            <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
+
+                <!-- begin:: Header Menu -->
+                <!-- Uncomment this to display the close button of the panel
+                <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+                -->
+                <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+                    <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+                        <ul class="kt-menu__nav ">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Header Menu -->
+                <!-- begin:: Header Topbar -->
+                <div class="kt-header__topbar">
+
+
+
+
+
+                    <!--begin: Quick panel toggler -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-placement="right">
+                        <span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
+                            @*<span style="font-size:15px; margin-right:15px;" class="flaticon2-bell-alarm-symbol btn btn-icon btn-brand btn-sm kt-pulse">
+                                    @foreach (var item in Model.notification)
+                                    {
+                                        <span class="badge">@Html.DisplayFor(modelItem => item.Count)</span>
+                                    }
+                                </span>*@
+                        </span>
+                    </div>
+
+                    <!--end: Quick panel toggler -->
+                    <!--begin: User Bar -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
+                            <div class="kt-header__topbar-user">
+
+                                <span class="kt-header__topbar-username kt-hidden-mobile">@ViewBag.Name</span>
+                                <img class="kt-hidden" alt="Pic" src="assets/media/users/300_25.jpg" />
+
+                                <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+
+                            </div>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+
+                            <!--begin: Head -->
+                            <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-color:#1e1e2d">
+                                <div class="kt-user-card__avatar">
+                                    @*<img class="kt-hidden" alt="Pic" src="~/assets/media/users/300_25.jpg" />*@
+
+                                    <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+
+                                </div>
+                                <div class="kt-user-card__name">
+                                    @ViewBag.Name
+                                </div>
+
+                            </div>
+
+                            <!--end: Head -->
+                            <!--begin: Navigation -->
+                            <div class="kt-notification">
+
+                                <div class="kt-notification__custom kt-space-between">
+                                    <a href="custom/user/login-v2.html" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Sign Out</a>
+
+                                </div>
+                            </div>
+
+                            <!--end: Navigation -->
+                        </div>
+                    </div>
+
+                    <!--end: User Bar -->
+                </div>
+
+                <!-- end:: Header Topbar -->
+            </div>
+            <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__head kt-portlet__head--lg">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <img src="/Images/@ViewBag.Logo" style="width:35px; height:35px;" />
+                                @*<i class="kt-font-brand flaticon2-line-chart"></i>*@
+                            </span>
+                            <h3 class="kt-portlet__head-title">
+                                @ViewBag.Company Detay Listesi
+                            </h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                        <div class="row align-items-center">
+                            <div class="col-xl-8 order-2 order-xl-1">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="kt-input-icon kt-input-icon--left">
+                                            <input type="text" class="form-control" placeholder="Arama..." id="searchrec">
+                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                <span><i class="la la-search"></i></span>
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-8 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="kt-form__group kt-form__group--inline">
+                                            <div class="kt-form__label">
+                                                <label>Tarih:</label>
+                                            </div>
+                                            <div class="input-daterange input-group" id="kt_datepicker_5" data-date-format="dd.mm.yyyy">
+
+                                                <input type="text" class="form-control datepickers" style="width:500px" id="ilkk" placeholder="gün/ay/yıl" name="start" onchange="myFunction()" />
+                                                <span class="input-group-text">
+                                                    <i class="la la-calendar"></i>
+                                                </span>
+
+
+                                                <input style="width:40px; margin-left:18px" type="text" id="sonn" class="form-control datepickers" placeholder="gün/ay/yıl" name="end" onchange="myFunction()" />
+                                                <span class="input-group-text">
+                                                    <i class="la la-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="kt-form__group kt-form__group--inline">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="kt-form__group kt-form__group--inline">
+
+                                        <div class="kt-form__control">
+                                            @*@Html.DropDownListFor(m => m.PieceId, (SelectList)ViewBag.Piece, "Lütfen Seçiniz", new { @class = "dropdown form-control", @id = "kt_form_status" })*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--begin::Portlet-->
+                        <div class="kt-portlet">
+                            <div class="kt-portlet__body">
+                                <div class="kt-portlet__body kt-portlet__body--fit">
+                                    <table class="table" id="detailTable">
+                                        <thead>
+                                            <tr class="table-heading">
+                                                <td>
+                                                    <span id="clpse-icon" style="color:#5D78FF; padding-left:70px;" onclick="sortTable(0)">
+                                                        Parça Sayısı <i class="flaticon2-arrow-down rotate" style="font-size:0.6rem;"></i>
+                                                    </span>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <span id="clpse-icon2" onclick="sortTable(1)" style="padding-left:70px;">Eklenme Tarihi <i class="flaticon2-arrow-down rotate" style="font-size:0.6rem;"></i></span>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="detailliste"></tbody>
+                                        <tr class="no-records" style="display: none;">
+                                            <td align="center" style="text-align:center">Kayıt bulunamadı.</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

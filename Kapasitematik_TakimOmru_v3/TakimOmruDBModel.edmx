@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TakimOmruDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Detail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PieceCount" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="FKSubPieceID" Type="int" />
+          <Property Name="FKUserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="NoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoteHeader" Type="nvarchar(max)" />
+          <Property Name="NoteDescription" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="FkPieceID" Type="int" />
+          <Property Name="FkSubPieceID" Type="int" />
+          <Property Name="FkUserID" Type="int" />
+          <Property Name="Type" Type="bit" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Notification_Description" Type="nvarchar(max)" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Notification_Date" Type="datetime" />
+          <Property Name="FKUserId" Type="int" />
+          <Property Name="FKNotificationSettingID" Type="int" />
+        </EntityType>
+        <EntityType Name="Piece">
+          <Key>
+            <PropertyRef Name="PieceID" />
+          </Key>
+          <Property Name="PieceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PieceName" Type="nvarchar(max)" />
+          <Property Name="FKUserID" Type="int" />
+          <Property Name="Adet" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="FKDeviceID" Type="int" />
+        </EntityType>
+        <EntityType Name="SubPiece">
+          <Key>
+            <PropertyRef Name="SubPieceID" />
+          </Key>
+          <Property Name="SubPieceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubPieceName" Type="nvarchar(max)" />
+          <Property Name="ToolLife" Type="int" />
+          <Property Name="Now" Type="int" />
+          <Property Name="FKPieceID" Type="int" />
+          <Property Name="FKUserID" Type="int" />
+          <Property Name="Type" Type="bit" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Company" Type="nvarchar(max)" />
+          <Property Name="CompanyLogo" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TakimOmruDB.dbo.PimsunDeviceNo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PimsunDeviceNo">
+          <Key>
+            <PropertyRef Name="MachineID" />
+          </Key>
+          <Property Name="MachineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceNo" Type="nvarchar(max)" />
+          <Property Name="MachineName" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Detail_SubPiece">
+          <End Role="SubPiece" Type="Self.SubPiece" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubPiece">
+              <PropertyRef Name="SubPieceID" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="FKSubPieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detail_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="FKUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Piece_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Piece" Type="Self.Piece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Piece">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubPiece_Piece">
+          <End Role="Piece" Type="Self.Piece" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SubPiece" Type="Self.SubPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piece">
+              <PropertyRef Name="PieceID" />
+            </Principal>
+            <Dependent Role="SubPiece">
+              <PropertyRef Name="FKPieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_Notification_Update_Counter_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="TakimOmruDBModelStoreContainer">
+          <EntitySet Name="Detail" EntityType="Self.Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Piece" EntityType="Self.Piece" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubPiece" EntityType="Self.SubPiece" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PimsunDeviceNo" EntityType="Self.PimsunDeviceNo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PimsunDeviceNo].[MachineID] AS [MachineID], 
+    [PimsunDeviceNo].[DeviceNo] AS [DeviceNo], 
+    [PimsunDeviceNo].[MachineName] AS [MachineName]
+    FROM [dbo].[PimsunDeviceNo] AS [PimsunDeviceNo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Detail_SubPiece" Association="Self.FK_Detail_SubPiece">
+            <End Role="SubPiece" EntitySet="SubPiece" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detail_User" Association="Self.FK_Detail_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_User" Association="Self.FK_Notification_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Piece_User" Association="Self.FK_Piece_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Piece" EntitySet="Piece" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubPiece_Piece" Association="Self.FK_SubPiece_Piece">
+            <End Role="Piece" EntitySet="Piece" />
+            <End Role="SubPiece" EntitySet="SubPiece" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TakimOmruDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Detail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PieceCount" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="FKSubPieceID" Type="Int32" />
+          <Property Name="FKUserID" Type="Int32" />
+          <NavigationProperty Name="SubPiece" Relationship="Self.FK_Detail_SubPiece" FromRole="Detail" ToRole="SubPiece" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Detail_User" FromRole="Detail" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Piece">
+          <Key>
+            <PropertyRef Name="PieceID" />
+          </Key>
+          <Property Name="PieceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PieceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FKUserID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Piece_User" FromRole="Piece" ToRole="User" />
+          <NavigationProperty Name="SubPiece" Relationship="Self.FK_SubPiece_Piece" FromRole="Piece" ToRole="SubPiece" />
+          <NavigationProperty Name="Notes" Relationship="TakimOmruDBModel.FK_Notes_Piece" FromRole="Piece" ToRole="Note" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Adet" Type="Int32" />
+          <Property Name="FKDeviceID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SubPiece">
+          <Key>
+            <PropertyRef Name="SubPieceID" />
+          </Key>
+          <Property Name="SubPieceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubPieceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToolLife" Type="Int32" />
+          <Property Name="Now" Type="Int32" />
+          <Property Name="FKPieceID" Type="Int32" annotation:StoreGeneratedPattern="None" />
+          <Property Name="FKUserID" Type="Int32" />
+          <Property Name="Type" Type="Boolean" />
+          <NavigationProperty Name="Detail" Relationship="Self.FK_Detail_SubPiece" FromRole="SubPiece" ToRole="Detail" />
+          <NavigationProperty Name="Piece" Relationship="Self.FK_SubPiece_Piece" FromRole="SubPiece" ToRole="Piece" />
+          <NavigationProperty Name="User" Relationship="Self.FK_SubPiece_User" FromRole="SubPiece" ToRole="User" />
+          <NavigationProperty Name="Notes" Relationship="TakimOmruDBModel.FK_Notes_SubPiece" FromRole="SubPiece" ToRole="Note" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Detail" Relationship="Self.FK_Detail_User" FromRole="User" ToRole="Detail" />
+          <NavigationProperty Name="Piece" Relationship="Self.FK_Piece_User" FromRole="User" ToRole="Piece" />
+          <NavigationProperty Name="SubPiece" Relationship="Self.FK_SubPiece_User" FromRole="User" ToRole="SubPiece" />
+          <NavigationProperty Name="Notification" Relationship="TakimOmruDBModel.FK_Notification_User" FromRole="User" ToRole="Notification" />
+          <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Notes" Relationship="TakimOmruDBModel.FK_Notes_User" FromRole="User" ToRole="Note" />
+        </EntityType>
+        <Association Name="FK_Detail_SubPiece">
+          <End Role="SubPiece" Type="Self.SubPiece" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubPiece">
+              <PropertyRef Name="SubPieceID" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="FKSubPieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detail_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Piece_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Piece" Type="Self.Piece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Piece">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubPiece_Piece">
+          <End Role="Piece" Type="Self.Piece" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SubPiece" Type="Self.SubPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piece">
+              <PropertyRef Name="PieceID" />
+            </Principal>
+            <Dependent Role="SubPiece">
+              <PropertyRef Name="FKPieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubPiece_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SubPiece" Type="Self.SubPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SubPiece">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TakimOmruDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Detail" EntityType="Self.Detail" />
+          <EntitySet Name="Piece" EntityType="Self.Piece" />
+          <EntitySet Name="SubPiece" EntityType="Self.SubPiece" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Detail_SubPiece" Association="Self.FK_Detail_SubPiece">
+            <End Role="SubPiece" EntitySet="SubPiece" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detail_User" Association="Self.FK_Detail_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Piece_User" Association="Self.FK_Piece_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Piece" EntitySet="Piece" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubPiece_Piece" Association="Self.FK_SubPiece_Piece">
+            <End Role="Piece" EntitySet="Piece" />
+            <End Role="SubPiece" EntitySet="SubPiece" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubPiece_User" Association="Self.FK_SubPiece_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="SubPiece" EntitySet="SubPiece" />
+          </AssociationSet>
+          <EntitySet Name="Notification" EntityType="TakimOmruDBModel.Notification" />
+          <AssociationSet Name="FK_Notification_User" Association="TakimOmruDBModel.FK_Notification_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <FunctionImport Name="SP_Notification_Update_Counter_v1" EntitySet="Notification" ReturnType="Collection(TakimOmruDBModel.Notification)">
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Notes" EntityType="TakimOmruDBModel.Note" />
+          <AssociationSet Name="FK_Notes_Piece" Association="TakimOmruDBModel.FK_Notes_Piece">
+            <End Role="Piece" EntitySet="Piece" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_SubPiece" Association="TakimOmruDBModel.FK_Notes_SubPiece">
+            <End Role="SubPiece" EntitySet="SubPiece" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User" Association="TakimOmruDBModel.FK_Notes_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <EntitySet Name="PimsunDeviceNoes" EntityType="TakimOmruDBModel.PimsunDeviceNo" />
+          </EntityContainer>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Notification_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Notification_Date" Type="DateTime" Precision="3" />
+          <Property Name="FKUserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TakimOmruDBModel.FK_Notification_User" FromRole="Notification" ToRole="User" />
+          <Property Name="FKNotificationSettingID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Notification_User">
+          <End Type="TakimOmruDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TakimOmruDBModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="FKUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="NoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoteHeader" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoteDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="FkPieceID" Type="Int32" />
+          <Property Name="FkSubPieceID" Type="Int32" />
+          <Property Name="FkUserID" Type="Int32" />
+          <NavigationProperty Name="Piece" Relationship="TakimOmruDBModel.FK_Notes_Piece" FromRole="Note" ToRole="Piece" />
+          <NavigationProperty Name="SubPiece" Relationship="TakimOmruDBModel.FK_Notes_SubPiece" FromRole="Note" ToRole="SubPiece" />
+          <NavigationProperty Name="User" Relationship="TakimOmruDBModel.FK_Notes_User" FromRole="Note" ToRole="User" />
+          <Property Name="Type" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Notes_Piece">
+          <End Type="TakimOmruDBModel.Piece" Role="Piece" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TakimOmruDBModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piece">
+              <PropertyRef Name="PieceID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="FkPieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_SubPiece">
+          <End Type="TakimOmruDBModel.SubPiece" Role="SubPiece" Multiplicity="0..1" />
+          <End Type="TakimOmruDBModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubPiece">
+              <PropertyRef Name="SubPieceID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="FkSubPieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User">
+          <End Type="TakimOmruDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TakimOmruDBModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="FkUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PimsunDeviceNo">
+          <Key>
+            <PropertyRef Name="MachineID" />
+          </Key>
+          <Property Name="MachineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MachineName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TakimOmruDBModelStoreContainer" CdmEntityContainer="TakimOmruDBEntities">
+          <EntitySetMapping Name="Detail">
+            <EntityTypeMapping TypeName="TakimOmruDBModel.Detail">
+              <MappingFragment StoreEntitySet="Detail">
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+                <ScalarProperty Name="PieceCount" ColumnName="PieceCount" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FKSubPieceID" ColumnName="FKSubPieceID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Piece">
+            <EntityTypeMapping TypeName="TakimOmruDBModel.Piece">
+              <MappingFragment StoreEntitySet="Piece">
+                <ScalarProperty Name="FKDeviceID" ColumnName="FKDeviceID" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PieceID" ColumnName="PieceID" />
+                <ScalarProperty Name="PieceName" ColumnName="PieceName" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubPiece">
+            <EntityTypeMapping TypeName="TakimOmruDBModel.SubPiece">
+              <MappingFragment StoreEntitySet="SubPiece">
+                <ScalarProperty Name="SubPieceID" ColumnName="SubPieceID" />
+                <ScalarProperty Name="SubPieceName" ColumnName="SubPieceName" />
+                <ScalarProperty Name="ToolLife" ColumnName="ToolLife" />
+                <ScalarProperty Name="Now" ColumnName="Now" />
+                <ScalarProperty Name="FKPieceID" ColumnName="FKPieceID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="TakimOmruDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CompanyLogo" ColumnName="CompanyLogo" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification">
+            <EntityTypeMapping TypeName="TakimOmruDBModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="FKNotificationSettingID" ColumnName="FKNotificationSettingID" />
+                <ScalarProperty Name="FKUserId" ColumnName="FKUserId" />
+                <ScalarProperty Name="Notification_Date" ColumnName="Notification_Date" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Notification_Description" ColumnName="Notification_Description" />
+                <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Notification_Update_Counter_v1" FunctionName="TakimOmruDBModel.Store.SP_Notification_Update_Counter_v1" />
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="TakimOmruDBModel.Note">
+              <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="FkUserID" ColumnName="FkUserID" />
+                <ScalarProperty Name="FkSubPieceID" ColumnName="FkSubPieceID" />
+                <ScalarProperty Name="FkPieceID" ColumnName="FkPieceID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="NoteDescription" ColumnName="NoteDescription" />
+                <ScalarProperty Name="NoteHeader" ColumnName="NoteHeader" />
+                <ScalarProperty Name="NoteID" ColumnName="NoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PimsunDeviceNoes">
+            <EntityTypeMapping TypeName="TakimOmruDBModel.PimsunDeviceNo">
+              <MappingFragment StoreEntitySet="PimsunDeviceNo">
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="DeviceNo" ColumnName="DeviceNo" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

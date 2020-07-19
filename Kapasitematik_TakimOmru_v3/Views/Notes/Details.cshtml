@@ -1,0 +1,67 @@
+﻿@model Kapasitematik_TakimOmru_v3.Note
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Note</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoteHeader)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoteHeader)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoteDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoteDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Piece.PieceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Piece.PieceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubPiece.SubPieceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubPiece.SubPieceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NoteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

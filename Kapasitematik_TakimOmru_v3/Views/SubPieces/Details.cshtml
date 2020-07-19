@@ -1,0 +1,67 @@
+﻿@model Kapasitematik_TakimOmru_v3.SubPiece
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SubPiece</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubPieceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubPieceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToolLife)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToolLife)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Now)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Now)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Piece.PieceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Piece.PieceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SubPieceID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

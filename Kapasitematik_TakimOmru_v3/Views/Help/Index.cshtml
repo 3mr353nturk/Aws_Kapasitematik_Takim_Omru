@@ -1,0 +1,654 @@
+﻿
+@{
+    ViewBag.Title = "Help";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .kt-sc-faq {
+        background-position: center top;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+        .kt-sc-faq .kt-sc__top {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding: 6rem 0 10rem;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+            .kt-sc-faq .kt-sc__top .kt-sc__title {
+                margin-bottom: 0;
+                font-size: 1.85rem;
+                font-weight: 600;
+                color: #48465b;
+            }
+
+            .kt-sc-faq .kt-sc__top .kt-sc__nav {
+                margin: auto 0 auto auto;
+            }
+
+                .kt-sc-faq .kt-sc__top .kt-sc__nav .kt-link {
+                    font-size: 1.3rem;
+                    font-weight: 400;
+                }
+</style>
+@section Scripts {
+    <script type="text/javascript">
+        $("#faqq1").on('click', function () {
+            var x = document.getElementById("faq1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        $("#faqq2").on('click', function () {
+            var faq1 = document.getElementById("faq1");
+            faq1.style.display = "none";
+            var x = document.getElementById("faq2");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        $("#faqq3").on('click', function () {
+            var faq2 = document.getElementById("faq2");
+            faq2.style.display = "none";
+            var x = document.getElementById("faq3");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        $("#faqq4").on('click', function () {
+            var faq3 = document.getElementById("faq3");
+            faq3.style.display = "none";
+            var x = document.getElementById("faq4");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        $("#faqq5").on('click', function () {
+            var faq4 = document.getElementById("faq4");
+            faq4.style.display = "none";
+            var x = document.getElementById("faq5");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        $("#faqq6").on('click', function () {
+            var faq5 = document.getElementById("faq5");
+            faq5.style.display = "none";
+            var x = document.getElementById("faq6");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        $("#faqq7").on('click', function () {
+            var faq6 = document.getElementById("faq6");
+            faq6.style.display = "none";
+            var x = document.getElementById("faq7");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        $("#faqq8").on('click', function () {
+            var faq7 = document.getElementById("faq7");
+            faq7.style.display = "none";
+            var x = document.getElementById("faq8");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        $("#faqq9").on('click', function () {
+            var faq8 = document.getElementById("faq8");
+            faq8.style.display = "none";
+            var x = document.getElementById("faq9");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        });
+        var modal = document.getElementById("tutorialsplaneModal");
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("myImg");
+        var modalImg = document.getElementById("img01");
+        img.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+
+        var img2 = document.getElementById("myImg2");
+        var modalImg = document.getElementById("img01");
+        img2.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+
+        var img3 = document.getElementById("myImg3");
+        var modalImg = document.getElementById("img01");
+        img3.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("btn btn-default")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+    </script>
+}
+
+
+<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+    <div class="kt-header-mobile__logo">
+        <a href="index.html">
+            <img alt="Logo" src="assets/media/logos/logo-light.png" />
+        </a>
+    </div>
+    <div class="kt-header-mobile__toolbar">
+        <button class="kt-header-mobile__toggler kt-header-mobile__toggler--left" id="kt_aside_mobile_toggler"><span></span></button>
+        <button class="kt-header-mobile__toggler" id="kt_header_mobile_toggler"><span></span></button>
+        <button class="kt-header-mobile__topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more"></i></button>
+    </div>
+</div>
+
+<!-- end:: Header Mobile -->
+<div class="kt-grid kt-grid--hor kt-grid--root">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+
+        <!-- begin:: Aside -->
+        <!-- Uncomment this to display the close button of the panel
+        <button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
+        -->
+        <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
+
+            <!-- begin:: Aside -->
+            <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
+                <div class="kt-aside__brand-logo">
+
+
+                </div>
+                <div class="kt-aside__brand-tools">
+                    <button class="kt-aside__brand-aside-toggler" id="kt_aside_toggler">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z" fill="#000000" fill-rule="nonzero" transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999) " />
+                                    <path d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999) " />
+                                </g>
+                            </svg>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                </g>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <!--
+                    <button class="kt-aside__brand-aside-toggler kt-aside__brand-aside-toggler--left" id="kt_aside_toggler"><span></span></button>
+                    -->
+                </div>
+            </div>
+
+            <!-- end:: Aside -->
+            <!-- begin:: Aside Menu -->
+            <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
+                <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
+                    <ul class="kt-menu__nav ">
+                        <li class="kt-menu__item " aria-haspopup="true">
+                            <a href="@Url.Action("TakimOmru", "Home")" class="kt-menu__link ">
+                                <span class="kt-menu__link-icon">
+
+                                    <img src="~/Content/icon-reward.png" style="width:40px; height:40px;" />
+                                </span><span class="kt-menu__link-text">Takım Ömrü</span>
+                            </a>
+                        </li>
+                        <li class="kt-menu__section ">
+                            <h4 class="kt-menu__section-text">Ayarlar</h4>
+                            <i class="kt-menu__section-icon flaticon-more-v2"></i>
+                        </li>
+                        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                            <a href="" class="kt-menu__link kt-menu__toggle">
+                                <span class="kt-menu__link-icon">
+                                    <img src="~/Content/icon-reward.png" style="width: 40px; height: 40px; " />
+                                </span><span class="kt-menu__link-text">Takım</span>
+                            </a>
+                            <div class="kt-menu__submenu ">
+                                <span class="kt-menu__arrow"></span>
+                                <ul class="kt-menu__subnav">
+                                    <li class="kt-menu__item " aria-haspopup="true"><a href="@Url.Action("Indexx", "Piece")" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Takım Ayarları</span></a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                            <a href="" class="kt-menu__link kt-menu__toggle">
+                                <span class="kt-menu__link-icon">
+                                    <img src="~/Content/icon-reward.png" style="width:40px; height:40px;" />
+                                </span><span class="kt-menu__link-text">Parça</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                            <div class="kt-menu__submenu ">
+                                <span class="kt-menu__arrow"></span>
+                                <ul class="kt-menu__subnav">
+                                    <li class="kt-menu__item " aria-haspopup="true"><a href="@Url.Action("Index", "SubPieces")" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Parça Ayarları</span></a></li>
+
+                                </ul>
+                            </div>
+                            <div class="kt-menu__submenu ">
+                                <span class="kt-menu__arrow"></span>
+                                <ul class="kt-menu__subnav">
+                                    <li class="kt-menu__item " aria-haspopup="true"><a href="@Url.Action("Index", "Detail")" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Eklenen Parçalar</span></a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- end:: Aside Menu -->
+        </div>
+
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+            <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
+
+                <!-- begin:: Header Menu -->
+                <!-- Uncomment this to display the close button of the panel
+                <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+                -->
+                <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+                    <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+                        <ul class="kt-menu__nav ">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Header Menu -->
+                <!-- begin:: Header Topbar -->
+                <div class="kt-header__topbar">
+
+
+
+
+
+                    <!--begin: Quick panel toggler -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-placement="right">
+                        <span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
+                            @*<span style="font-size:15px; margin-right:15px;" class="flaticon2-bell-alarm-symbol btn btn-icon btn-brand btn-sm kt-pulse">
+                                    @foreach (var item in Model.notification)
+                                    {
+                                        <span class="badge">@Html.DisplayFor(modelItem => item.Count)</span>
+                                    }
+                                </span>*@
+                        </span>
+                    </div>
+
+                    <!--end: Quick panel toggler -->
+                    <!--begin: User Bar -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
+                            <div class="kt-header__topbar-user">
+
+                                <span class="kt-header__topbar-username kt-hidden-mobile">@ViewBag.Name</span>
+                                <img class="kt-hidden" alt="Pic" src="assets/media/users/300_25.jpg" />
+
+                                <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+
+                            </div>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+
+                            <!--begin: Head -->
+                            <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-color:#1e1e2d">
+                                <div class="kt-user-card__avatar">
+                                    @*<img class="kt-hidden" alt="Pic" src="~/assets/media/users/300_25.jpg" />*@
+
+                                    <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+
+                                </div>
+                                <div class="kt-user-card__name">
+                                    @ViewBag.Name
+                                </div>
+
+                            </div>
+
+                            <!--end: Head -->
+                            <!--begin: Navigation -->
+                            <div class="kt-notification">
+
+                                <div class="kt-notification__custom kt-space-between">
+                                    <a href="custom/user/login-v2.html" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Sign Out</a>
+
+                                </div>
+                            </div>
+
+                            <!--end: Navigation -->
+                        </div>
+                    </div>
+
+                    <!--end: User Bar -->
+                </div>
+
+                <!-- end:: Header Topbar -->
+            </div>
+            <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+                <!-- begin:: Content -->
+                <!-- begin:: Hero -->
+                <div class="kt-sc-faq">
+                    <div class="kt-container ">
+                        <div class="kt-sc__top">
+                            <h3 class="kt-sc__title">
+                                <a href="#" class="kt-link kt-font-bold">Yardım Merkezi</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end:: Hero -->
+                <div class="kt-negative-spacing--7"></div>
+
+                <!-- begin:: Section -->
+                <div class="kt-container ">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__body">
+                            <div class="kt-infobox">
+                                <div class="kt-infobox__body">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-nav--v4" role="tablist">
+                                                <li class="kt-nav__item active">
+                                                    <a class="kt-nav__link" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text" id="faqq1">Takım Ömrü</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a class="kt-nav__link" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text" id="faqq2">Takım Ayarları</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a class="kt-nav__link" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text" id="faqq3">Parça Ayarları</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a class="kt-nav__link" id="faqq4" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text">Eklenen Parçalar</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a class="kt-nav__link" id="faqq5" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text">Bildirimler</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a class="kt-nav__link" id="faqq6" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text">Hesabım</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a class="kt-nav__link" id="faqq7" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text">Takım Ekleme</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a class="kt-nav__link" id="faqq8" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text">Parça Ekleme</span>
+                                                    </a>
+                                                </li>
+                                                <li class="kt-nav__item">
+                                                    <a class="kt-nav__link" id="faqq9" data-toggle="tab" role="tab">
+                                                        <span class="kt-nav__link-text">Parça Detay Ekleme</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-9">
+
+                                            <!--begin::Accordion-->
+                                            <div class="accordion accordion-light  accordion-svg-icon" id="faq">
+                                                <div class="card">
+                                                    <div class="card-header" id="faqHeading1">
+                                                        <div class="card-title collapsed" data-toggle="collapse" data-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                </g>
+                                                            </svg> Takım Ömrü sayfasının kullanım amacı
+                                                        </div>
+                                                    </div>
+                                                    <div id="faq1" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq">
+                                                        <div class="card-body">
+                                                            Takım Ömrü sayfası, takımlar ve takımlara ait tüm parçaların anlık durumlarının görüntülenmesini sağlar. Takımlardaki parçaların gün bazında ne kadar ilerleme kat ettiğini, ömürlerinin bitmesine gün bazında kaç gün kaldığını, parça bazında ise kaç parça kaldığı, ömrü bitmek üzere olan parçaların görünebildiği gibi bilgilerin görüntülendiği, takımların ve parçaların eklenebildiği, güncellenebildiği, silinebildiği, arama, sıralama, sayfalama, filtreleme gibi işlemlerin yapılabildiği, tüm takımların ve parçaların excel olarak çıktılarının alınabildiği çok fonksiyonlu bir sayfadır.
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqHeading2">
+                                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg> Takım ayarları sayfasının içerdiği fonksiyonlar
+                                                            </div>
+                                                        </div>
+                                                        <div id="faq2" class="collapse" aria-labelledby="faqHeading2" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                Takım ayarları sayfası takımların listelendiği sayfadır. İçerisinde ekleme, güncelleme, silme, filtreleme, sıralama ve arama fonksiyonlarını içermektedir.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqHeading3">
+                                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg> Parça ayarları sayfasının içerdiği fonksiyonlar
+                                                            </div>
+                                                        </div>
+                                                        <div id="faq3" class="collapse" aria-labelledby="faqHeading3" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                Parça ayarları sayfası takımlara ait parçaların listelendiği sayfadır. İçerisinde ekleme, güncelleme, silme, filtreleme, sıralama ve arama fonksiyonlarını içermektedir.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqHeading4">
+                                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg> Eklenen parçalar sayfasının içerdiği fonksiyonlar
+                                                            </div>
+                                                        </div>
+                                                        <div id="faq4" class="collapse" aria-labelledby="faqHeading4" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                Eklenen parçalar sayfası takımlara ait parçaların detaylarının listelendiği sayfadır. İçerisinde ekleme, güncelleme, silme, filtreleme, sıralama ve arama fonksiyonlarını içermektedir.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqHeading5">
+                                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg> Bildirimler sayfasının içerdiği fonksiyonlar
+                                                            </div>
+                                                        </div>
+                                                        <div id="faq5" class="collapse" aria-labelledby="faqHeading5" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                Bildirimler sayfası tüm bildirimler, son 7 gün bildirimleri ve son 30 gün bildirimleri olmak üzere 3 kısımdan oluşan, takımlara ait parçaların ömürlerinin bitmeye yaklaştığının görülmesini sağlayan sayfadır.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqHeading6">
+                                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg> Hesabım sayfasının içerdiği fonksiyonlar
+                                                            </div>
+                                                        </div>
+                                                        <div id="faq6" class="collapse" aria-labelledby="faqHeading6" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                Hesabım sayfası firma bilgilerinin olduğu, bilgilerin değiştirilebildiği, takımların ve takımlara ait parça notlarının listelendiği profil sayfasıdır.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqHeading7">
+                                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#faq7" aria-expanded="false" aria-controls="faq7">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg> Takımlarımızı nasıl ekleriz?
+                                                            </div>
+                                                        </div>
+                                                        <div id="faq7" class="collapse" aria-labelledby="faqHeading7" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                <div class="col-md-6">
+                                                                    <img id="myImg" class="" data-toggle="modal" data-target="#tutorialsplaneModal" src="~/Images/test1_tonedd.png" style="width: 420px; height: 250px;" />
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span>Takım Ayarları sayfasında takım listesinde sağ tarafta bulunan + işaretine tıklanılarak takımlarınızı ekleyebilirsiniz. Aynı zamanda + işaretinin yanında bulunan kalem işareti ile takımlarınızı düzenleyebilir, silme işareti ile takımlarınızı silebilirsiniz.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqHeading8">
+                                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#faq8" aria-expanded="false" aria-controls="faq8">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg> Parçalarımızı nasıl ekleriz?
+                                                            </div>
+                                                        </div>
+                                                        <div id="faq8" class="collapse" aria-labelledby="faqHeading8" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                <div class="col-md-6">
+                                                                    <img id="myImg2" class="" data-toggle="modal" data-target="#tutorialsplaneModal" src="~/Images/test4_tonedd.png" style="width: 420px; height: 250px;" />
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span>Parça Ayarları sayfasında parça listesinde sağ tarafta bulunan + işaretine tıklanılarak takımlarınıza ait parçalarınızı ekleyebilirsiniz. Aynı zamanda + işaretinin yanında bulunan kalem işareti ile parçalarınızı düzenleyebilir, silme işareti ile parçalarınızı silebilirsiniz.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqHeading9">
+                                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#faq9" aria-expanded="false" aria-controls="faq9">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg> Parçalarımıza ait detayı nasıl ekleriz?
+                                                            </div>
+                                                        </div>
+                                                        <div id="faq9" class="collapse" aria-labelledby="faqHeading9" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                <div class="col-md-6">
+                                                                    <img id="myImg3" class="" data-toggle="modal" data-target="#tutorialsplaneModal" src="~/Images/test5_tonedd.png" style="width: 420px; height: 250px;" />
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <span>Parça Ayarları altında bulunan Eklenen Parçalar sayfasında parça listesinde sağ tarafta bulunan + işaretine tıklanılarak takımlarınıza ait parçalarınıza detaylarınızı ekleyebilirsiniz. Aynı zamanda + işaretinin yanında bulunan kalem işareti ile parçalarınızın detaylarını düzenleyebilir, silme işareti ile parçanızın detaylarını silebilirsiniz.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end::Accordion-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----modal starts here--->
+                    <div id="tutorialsplaneModal" class="modal fade" role='dialog'>
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <img id="img01" src="" style="width: 750px; height: 250px;">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Modal ends here--->
+                    <!-- end:: Section -->
+                    <!-- begin:: Section -->
+                    <!-- end:: Section -->
+                    <!-- end:: Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+@*  *@

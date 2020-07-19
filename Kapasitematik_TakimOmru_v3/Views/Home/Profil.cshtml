@@ -1,0 +1,243 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+    <div class="kt-header-mobile__logo">
+        <a href="index.html">
+            @*<img alt="Logo" style="width:50px; height:30px;" src="~/assets/media/logos/logo.PNG" />*@
+        </a>
+    </div>
+    <div class="kt-header-mobile__toolbar">
+        <button class="kt-header-mobile__toggler kt-header-mobile__toggler--left" id="kt_aside_mobile_toggler"><span></span></button>
+        <button class="kt-header-mobile__toggler" id="kt_header_mobile_toggler"><span></span></button>
+        <button class="kt-header-mobile__topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more"></i></button>
+    </div>
+</div>
+
+<!-- end:: Header Mobile -->
+<div class="kt-grid kt-grid--hor kt-grid--root">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+
+        
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+
+            <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
+
+                <!-- begin:: Header Menu -->
+                <!-- Uncomment this to display the close button of the panel
+        <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+        -->
+                <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+                    <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+                        <ul class="kt-menu__nav ">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Header Menu -->
+                <!-- begin:: Header Topbar -->
+                <div class="kt-header__topbar">
+
+
+
+
+
+                    <!--begin: Quick panel toggler -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-placement="right">
+                        <span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
+                            @*<span style="font-size:15px; margin-right:15px;" class="flaticon2-bell-alarm-symbol btn btn-icon btn-brand btn-sm kt-pulse">
+                    @foreach (var item in Model.notification)
+                    {
+                        <span class="badge">@Html.DisplayFor(modelItem => item.Count)</span>
+                    }
+                </span>*@
+                        </span>
+                    </div>
+
+                    <!--end: Quick panel toggler -->
+                    <!--begin: User Bar -->
+                    <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
+                            <div class="kt-header__topbar-user">
+                                <span class="kt-header__topbar-welcome kt-hidden-mobile"></span>
+                                <span class="kt-header__topbar-username kt-hidden-mobile">@ViewBag.Name</span>
+                                <img class="kt-hidden" alt="Pic" src="assets/media/users/300_25.jpg" />
+
+                                <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+
+                            </div>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+
+                            <!--begin: Head -->
+                            <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-color:#1e1e2d">
+                                <div class="kt-user-card__avatar">
+                                    @*<img class="kt-hidden" alt="Pic" src="~/assets/media/users/300_25.jpg" />*@
+
+                                    <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+                                    <span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success"><img src="~/Images/@ViewBag.Logo" /></span>
+                                </div>
+                                <div class="kt-user-card__name">
+                                    @ViewBag.Name
+                                </div>
+
+                            </div>
+
+                            <!--end: Head -->
+                            <!--begin: Navigation -->
+                            <div class="kt-notification">
+
+                                <a href="@Url.Action("Profil", "Home")" class="kt-notification__item">
+                                    <div class="kt-notification__item-icon">
+                                        <i class="flaticon2-calendar-3 kt-font-success"></i>
+                                    </div>
+                                    <div class="kt-notification__item-details">
+                                        <div class="kt-notification__item-title kt-font-bold">
+                                            Hesabım
+                                        </div>
+                                    </div>
+                                </a>
+                                @using (Html.BeginForm("Logout", "Login"))
+                                {
+                                    <div class="kt-notification__custom kt-space-between">
+
+                                        <input type="submit" class="btn btn-label btn-label-brand btn-sm btn-bol" value="Çıkış Yap" />
+
+                                    </div>
+                                }
+                            </div>
+
+                            <!--end: Navigation -->
+                        </div>
+                    </div>
+
+
+                    <!--end: User Bar -->
+                </div>
+
+                <!-- end:: Header Topbar -->
+            </div>
+            <!-- end:: Aside -->
+            <!-- begin:: Content -->
+            <!-- begin:: Content -->
+            <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+                <!--Begin::App-->
+                <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
+
+                    <!--Begin:: App Aside Mobile Toggle-->
+                    <button class="kt-app__aside-close" id="kt_user_profile_aside_close">
+                        <i class="la la-close"></i>
+                    </button>
+
+                    <!--End:: App Aside Mobile Toggle-->
+                    <!--Begin:: App Aside-->
+                    <div class="kt-grid__item kt-app__toggle kt-app__aside" id="kt_user_profile_aside">
+
+                        <!--begin:: Widgets/Applications/User/Profile1-->
+                        <div class="kt-portlet kt-portlet--height-fluid-">
+                            <div class="kt-portlet__head  kt-portlet__head--noborder">
+                                <div class="kt-portlet__head-label">
+                                    <h3 class="kt-portlet__head-title">
+                                    </h3>
+                                </div>
+
+                            </div>
+                            <div class="kt-portlet__body kt-portlet__body--fit-y">
+
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--user-profile-1">
+                                    <div class="kt-widget__head">
+                                        <div class="kt-widget__media">
+                                            <img src="~/Content/tezmaksan logo-311x60.png" />
+                                        </div>
+                                        <div class="kt-widget__content">
+                                            <div class="kt-widget__section">
+                                                <a href="#" class="kt-widget__username">
+                                                    @ViewBag.Name
+                                                    <i class="flaticon2-correct kt-font-success"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="kt-widget__content">
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="kt-widget__info">
+                                                    <span class="kt-widget__label">Kullanıcı Adı:</span>
+                                                    @Html.DisplayFor(modelItem => item.UserName, new { @class= "kt-widget__data" })
+                                                </div>
+                                                <div class="kt-widget__info">
+                                                    <span class="kt-widget__label">Firma Adı:</span>
+                                                    @Html.DisplayFor(modelItem => item.Company, new { @class = "kt-widget__data" })
+                                                </div>
+                                                <div class="kt-widget__info">
+                                                    <span class="kt-widget__label">Email:</span>
+                                                    @Html.DisplayFor(modelItem => item.Email, new { @class = "kt-widget__data" })
+                                                </div>
+                                            }
+                                            </div>
+                                        <div class="kt-widget__items">
+                                            @foreach (var item in Model)
+                                            {
+                                                <a href='@Url.Action("Edit", "Home", new { id = item.UserID })' class=" kt-widget__item ">
+                                                    <span class="kt-widget__section">
+                                                        <span class="kt-widget__icon">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                                    <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                                    <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+                                                                </g>
+                                                            </svg>
+                                                        </span>
+                                                        <span class="kt-widget__desc">
+                                                            Hesabımı Düzenle
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <a href='@Url.Action("Note", "Home")' class=" kt-widget__item ">
+                                                    <span class="kt-widget__section">
+                                                        <span class="kt-widget__icon">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                    <rect x="0" y="0" width="24" height="24" />
+                                                                    <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953) " />
+                                                                    <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                                </g>
+                                                            </svg>
+                                                        </span>
+                                                        <span class="kt-widget__desc">
+                                                            Notlarım
+                                                        </span>
+                                                    </span>
+                                                </a>
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+
+                        <!--end:: Widgets/Applications/User/Profile1-->
+                    </div>
+
+                    <!--End:: App Aside-->
+                  
+                </div>
+
+                <!--End::App-->
+            </div>
+
+            <!-- end:: Content -->
+        </div>
+    </div>
+</div>
